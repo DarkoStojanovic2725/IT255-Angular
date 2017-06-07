@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="naziv" routerLink="">Domaci 12</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="">Home</a></li>
+       <li><ng-container *ngIf="isAuth == 'yes'"><a routerLink="/addMember">Add Member</a></ng-container></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><ng-container *ngIf="isAuth == 'no'"><a routerLink="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></ng-container></li>
+        <li><ng-container *ngIf="isAuth == 'no'"><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></ng-container></li>
+        <li><ng-container *ngIf="isAuth == 'yes'"><a (click)="onLogout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></ng-container></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<router-outlet></router-outlet>
