@@ -134,5 +134,39 @@ function addMembers($ime, $prezime){
     }
     return json_encode($rarray);
 }
-  
+
+function deleteMember($id){
+    global $conn;
+    $rarray = array();
+    if(checkIfLoggedIn()){
+        $result = $conn->prepare("DELETE FROM members WHERE id=?");
+        $result->bind_param("i",$id);
+        $result->execute();
+        $rarray['success'] = "ok";
+    } else{
+        $rarray['error'] = "Please log in";
+        header('HTTP/1.1 401 Unauthorized');
+    }
+    return json_encode($rarray);
+}
+
+function getAllMembers(){
+	global $conn;
+	$member = "SELECT * FROM members";
+	if($stmt = $conn->prepare($member)){
+    	$stmt->execute();
+		if(!$stmt->execute()){ 
+        	echo $stmt->error.' in query: '.$userinfo; 
+		} else {
+        	$parameters = array();
+        	$result = $stmt->get_result();
+        	while ($row = $result->fetch_assoc()) {
+          		array_push($parameters,$row);
+        	}
+        	$stmt->close(); 
+        	return $parameters;
+    	}
+    	$stmt->close();
+  	}
+}
 ?>
