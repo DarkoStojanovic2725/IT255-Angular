@@ -12,6 +12,7 @@
                   <th>Ime</th>
                   <th >Prezime</th>
                   <ng-container *ngIf="isAuth == 'yes'"><th>Delete</th></ng-container>
+                  <ng-container *ngIf="isAuth == 'yes'"><th>Edit</th></ng-container>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                     <td>{{members.ime}}</td>
                     <td>{{members.prezime}}</td>
                     <ng-container *ngIf="isAuth == 'yes'"><td><button class="btn btn-danger" (click)="removeMember($event, members.id)">Remove</button></td></ng-container>
+                    <ng-container *ngIf="isAuth == 'yes'"><td><button class="btn btn-default" (click)="onEditMember(members.id)">Edit</button></td></ng-container>
                   </tr>
                 </ng-container>
                 </tbody>

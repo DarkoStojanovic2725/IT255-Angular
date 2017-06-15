@@ -46,8 +46,7 @@ export class HomeComponent implements OnInit {
       event.srcElement.parentElement.parentElement.remove();
     });
   }
-
-  public vievMember(id: number ) {
-    this.router.navigateByUrl('member/' + id);
+  public onEditMember(id: number) {
+    this.router.navigateByUrl('editMember/' + id);
   }
 }

@@ -169,4 +169,22 @@ function getAllMembers(){
     	$stmt->close();
   	}
 }
+
+function editMember($id, $ime,$prezime){
+    global $conn;
+    $rarray = array();
+    if(checkIfLoggedIn()){
+		$stmt = $conn->prepare("UPDATE members SET ime=?, prezime=? WHERE id=?");
+		$stmt->bind_param("ssi", $ime, $prezime, $id);
+        if($stmt->execute()){
+            $rarray['success'] = "ok";
+        }else{
+            $rarray['error'] = "Database connection error";
+        }
+    } else{
+        $rarray['error'] = "Please log in";
+        header('HTTP/1.1 401 Unauthorized');
+    }
+    return json_encode($rarray);
+}
 ?>
